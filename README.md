@@ -14,7 +14,7 @@ Le projet :
 aura définie, puis enfin, cette chaîne devra générer un rapport complet au format html. Afin de 
 vérifier si le code que l'on produit est bien conforme à nos exigences, aussi bien par rapport 
 aux spécifications que par rapport à la conception logiciel,la batterie de test devra être la plus
-pertinente possible. Pour accroitre la confiance dans nos test et le code que l'on aura produit, nous 
+pertinente possible. Pour accroître la confiance dans nos test et le code que l'on aura produit, nous 
 allons utiliser une analyse de test par mutation. Le code source sera modifié, grâce à différentes 
 mutation (selecteur, mutation). Le programme mutant produit sera ensuite passé à travers notre batterie de test.
 Afin que ces mutants puissent être utilisés de manière efficiente, il est nécessaire de ne pas introduire des
