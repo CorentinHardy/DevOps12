@@ -1,6 +1,6 @@
 package com.mycompany.app;
 
-import main.java.com.mycompany.app.App;
+import com.mycompany.app.App;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -30,13 +30,12 @@ public class AppTest
         return new TestSuite( AppTest.class );
     }
 
-    @test
     /**
      * Rigourous Test :-)
      */
     public void testApp()
     {
         assertTrue( true );
-        assertTure(App.methodTest() == 1);
+        assertEquals(App.methodTest(), 1);
     }
 }
