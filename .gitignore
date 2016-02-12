@@ -1,0 +1,8 @@
+# System files
+.DS_STORE
+
+# IDE
+.idea
+
+# build directory
+target/
