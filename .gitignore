@@ -1,6 +1,11 @@
 # System files
 .DS_STORE
 
+# Eclipse
+.classpath
+.project
+.settings/
+
 # IDE
 .idea
 
