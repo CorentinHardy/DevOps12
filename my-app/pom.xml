@@ -8,6 +8,11 @@
   <name>my-app</name>
   <url>http://maven.apache.org</url>
   <dependencies>
+	<dependency>
+	    <groupId>fr.inria.gforge.spoon</groupId>
+	    <artifactId>spoon-core</artifactId>
+	    <version>5.0.1</version>
+	</dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
