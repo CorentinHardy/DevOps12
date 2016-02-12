@@ -10,4 +10,8 @@ public class App
     {
         System.out.println( "Hello World!" );
     }
+
+    public static int methodTest(){
+        return 1;
+    }
 }
