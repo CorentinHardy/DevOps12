@@ -1,7 +1,5 @@
 package com.mycompany.app;
 
-import com.mycompany.app.App;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -36,6 +34,6 @@ public class AppTest
     public void testApp()
     {
         assertTrue( true );
-        assertEquals(App.methodTest(), 1);
+        assertEquals(App.methodTest(), 2);
     }
 }
