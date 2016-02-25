@@ -3,6 +3,7 @@ echo "Démarrage du test par mutation"
 PATH_DEVOPS=$(pwd)
 PATH_SOURCE=$PATH_DEVOPS/DevopsEntree
 PATH_MUTANT=$PATH_DEVOPS/DevopsMutation/src/main/java/DevopsTest/mutators/
+SCRIPT_GENERATION=xml.sh
 
 ID="DevopsTest.mutators."
 
@@ -23,13 +24,23 @@ echo -e "#######################################################################
    SED="s/<processor>.*/\<processor\>$ID$PROCESSOR\<\/processor\>/"
    sed -i $SED  "$PATH_SOURCE"/pom.xml
    cd "$PATH_SOURCE"
-   mvn3 clean >/dev/null
-   mvn3 test >/dev/null
+   # mvn clean >/dev/null
+   mvn test >/dev/null
 
 echo -e "\n\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 echo " Copie du fichier rapport dans $PATH_SOURCE/target/surefire-reports/TEST-$PROCESSOR.xml"
 echo -e "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n"
-   cp "$PATH_SOURCE"/target/surefire-reports/TEST-Devops.sources.AppTest.xml "$PATH_SOURCE"/target/surefire-reports/TEST-$PROCESSOR.xml
+   mv "$PATH_SOURCE"/target/surefire-reports/TEST-Devops.sources.AppTest.xml "$PATH_SOURCE"/target/surefire-reports/TEST-$PROCESSOR.xml
 done < processor.txt
 
+echo -e "\n\n########################################################################################"
+echo "########################################################################################"
+echo " Generation de l'affichage"
+echo "########################################################################################"
+echo -e "########################################################################################\n\n"
 
+echo " Execution de $SCRIPT_GENERATION"
+
+cd $PATH_DEVOPS/../GenerationXml
+./$SCRIPT_GENERATION
+cd $PATH_DEVOPS
