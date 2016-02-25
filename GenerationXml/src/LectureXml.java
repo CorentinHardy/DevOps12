@@ -16,13 +16,14 @@ import org.xml.sax.SAXException;
 
 public class LectureXml {
 	
-	String racineMaven;
-	String repReport="/target/surefire-reports";
-	File rep;
-	String[] listFile;
-	List<String> listReport=new ArrayList<String>();
+	private String racineMaven;
+	private String repReport="/target/surefire-reports";
+	private File rep;
+	private String[] listFile;
+	private List<String> listReport=new ArrayList<String>();
 	int nbMutakill=0;
-	
+	private List<String> listMutation=new ArrayList<String>();
+	private boolean[] mutationResult;
 	private String dest="../mutation-testing-report.xml";
 	public LectureXml(String racineMaven)
 	{
@@ -38,6 +39,7 @@ public class LectureXml {
 			if (listFile[i].startsWith("TEST"))
 			{
 				listReport.add(listFile[i]);
+				System.out.println(i);
 			}
 		}
 		
@@ -45,11 +47,14 @@ public class LectureXml {
 	}
 	public void readAll()
 	{
+		this.listerReport();
+		mutationResult=new boolean[listReport.size()];
 		for (int i=0; i<listReport.size(); i++)
 		{
 			this.read(i);
 		}
 	}
+	
 	
 	public void read(int i)
 	{
@@ -58,10 +63,16 @@ public class LectureXml {
 		try{
 			final DocumentBuilder builder = factory.newDocumentBuilder();
 			final Document document= builder.parse(new File(rep+"/"+listReport.get(i)));
+			listMutation.add(listReport.get(i).substring(5,listReport.get(i).length()-4));
 			final Element racine = document.getDocumentElement();
 			if( (!(racine.getAttribute("failures").equals("0"))) | !(racine.getAttribute("errors").equals("0")))
 			{
 				nbMutakill++;
+				mutationResult[i]=true;
+			}
+			else
+			{
+				mutationResult[i]=false;
 			}
 		}catch(final ParserConfigurationException | SAXException | IOException e) {
 		    e.printStackTrace();	
@@ -88,8 +99,15 @@ public class LectureXml {
 	
 	public void generateReport()
 	{
-		WriteXml w=new WriteXml(listReport.size(), nbMutakill ,dest);
-		w.createXml();
+//		WriteXml w=new WriteXml(listReport.size(), nbMutakill ,dest);
+//		w.createXml();
+		//(List<String> mutaName,boolean[] mutaResult,int nbKilled)
+		
+		this.readAll();
+		WriteHtml w=new WriteHtml(listMutation,mutationResult,nbMutakill);
+		
+		w.WriteFile();
+		w.printFile();
 	}
 	
 }
