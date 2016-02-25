@@ -8,6 +8,8 @@ import java.util.List;
 
 public class WriteHtml {
 
+	int error;
+	int fail;
 	private List<String> mutationName;
 	private boolean[] mutationResult;
 	private int nbMutation;
@@ -24,12 +26,14 @@ public class WriteHtml {
 			"\n</head>" +
 			"\n<body>";
 			
-	public WriteHtml(List<String> mutaName,boolean[] mutaResult,int nbKilled)
+	public WriteHtml(List<String> mutaName,boolean[] mutaResult,int nbKilled, int fail, int error)
 	{
 		this.mutationName=mutaName;
 		this.mutationResult=mutaResult;
 		this.nbMutation=mutationName.size();
 		this.nbMutationKilled=nbKilled;
+		this.fail=fail;
+		this.error=error;
 		
 	}
 	public void printFile()
@@ -76,13 +80,18 @@ public class WriteHtml {
 	public void writeMessage()
 	{
 		this.add("Résultat des tests par mutations","h1");
+		fich+="<div>";
 		this.add("Informations générales","h2");
 		this.add("Nombre de mutants générés : "+nbMutation,"p");
 		this. add("Nombre de mutants tués : "+nbMutationKilled,"p");
 		this.add("Nombre de mutants survivants : "+(nbMutation-nbMutationKilled),"p");
+		fich+="</div>";
+		fich+="<div>";
 		this.add("Stastitiques", "h2");
 		this.add(stats.get(1), "p");
 		this.add(stats.get(0), "p");
+		fich+="</div>";
+		fich+="<div>";
 		this.add("Résultat par processeur","h2");
 		
 		for (int k=0; k<mutationName.size(); k++)
@@ -101,6 +110,7 @@ public class WriteHtml {
 			this.add(s,"p");
 			
 		}
+		fich+="</div>";
 		
 		
 	}

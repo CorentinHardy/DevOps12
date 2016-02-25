@@ -15,7 +15,8 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class LectureXml {
-	
+	int fail=0;
+	int error=0;
 	private String racineMaven;
 	private String repReport="/target/surefire-reports";
 	private File rep;
@@ -68,10 +69,19 @@ public class LectureXml {
 			{
 				nbMutakill++;
 				mutationResult[i]=true;
+			
 			}
 			else
 			{
 				mutationResult[i]=false;
+				if(racine.getAttribute("failures").equals("0"))
+				{
+					fail++;
+				}
+				else 
+				{
+					error++;
+				}
 			}
 		}catch(final ParserConfigurationException | SAXException | IOException e) {
 		    e.printStackTrace();	
@@ -103,7 +113,7 @@ public class LectureXml {
 		//(List<String> mutaName,boolean[] mutaResult,int nbKilled)
 		
 		this.readAll();
-		WriteHtml w=new WriteHtml(listMutation,mutationResult,nbMutakill);
+		WriteHtml w=new WriteHtml(listMutation,mutationResult,nbMutakill,fail,error);
 		
 		w.WriteFile();
 	
