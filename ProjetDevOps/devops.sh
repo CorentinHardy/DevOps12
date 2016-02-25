@@ -25,7 +25,7 @@ echo -e "#######################################################################
    sed -i $SED  "$PATH_SOURCE"/pom.xml
    cd "$PATH_SOURCE"
    # mvn clean >/dev/null
-   mvn test >/dev/null
+   mvn3 test >/dev/null
 
 echo -e "\n\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 echo " Copie du fichier rapport dans $PATH_SOURCE/target/surefire-reports/TEST-$PROCESSOR.xml"
@@ -41,6 +41,7 @@ echo -e "#######################################################################
 
 echo " Execution de $SCRIPT_GENERATION"
 
-cd $PATH_DEVOPS/../GenerationXml
-./$SCRIPT_GENERATION
-cd $PATH_DEVOPS
+cd "$PATH_DEVOPS"/../GenerationXml
+./"$SCRIPT_GENERATION"
+cd "$PATH_DEVOPS"
+firefox -new-window ../mutation-testing-report.html 
