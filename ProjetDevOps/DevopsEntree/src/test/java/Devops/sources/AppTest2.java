@@ -7,15 +7,10 @@ import junit.framework.TestSuite;
 /**
  * Unit test for simple App.
  */
-public class AppTest 
+public class AppTest2
     extends TestCase
 {
         public void testretourneVal() throws Exception {
- 
-                assertEquals(2,App.retourneVal());
-        }
-
-	public void testretourneUnaireVal() throws Exception {
  
                 assertEquals(2,App.unaireVal());
         }
