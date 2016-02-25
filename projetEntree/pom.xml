@@ -33,15 +33,20 @@
         </executions>
         <configuration>
           <processors>
-            <processor>fr.inria.gforge.spoon.processors.CatchProcessor</processor>
+            <processor>fr.devops.app.Processor</processor>
+            <processor>fr.devops.app.my-app.Processor</processor>
           </processors>
         </configuration>
-        <!-- To be sure that you use the latest version of Spoon, specify it as dependency. -->
         <dependencies>
           <dependency>
             <groupId>fr.inria.gforge.spoon</groupId>
             <artifactId>spoon-core</artifactId>
             <version>4.1.0</version>
+          </dependency>
+          <dependency>
+            <groupId>fr.devops.app</groupId>
+            <artifactId>my-app</artifactId>
+            <version>1.0-SNAPSHOT</version>
           </dependency>
         </dependencies>
       </plugin>
