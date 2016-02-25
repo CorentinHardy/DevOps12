@@ -1,0 +1,14 @@
+-Exemple de comment lancer ce programme dans xml.sh (compilation + lancement).
+
+-Si l'on fait java -cp bin Main my-app
+
+my-app correspond au chemin d'un repertoire. 
+
+Ce repertoire est organisé comme ça : 
+my-app/target/surefire-reports/
+ 
+Dans surefire-reports sont contenus de multiples fichier commençant par TEST.
+Chaque fichier de ce répertoire commençant par TEST sera considéré comme un rapport maven pour une mutation. 
+
+!Attention à ce qu'il n'y est pas le rapport du code de base, ou qu'il commence par autre chose que TEST (ou on le considère comme mutation identité).
+
