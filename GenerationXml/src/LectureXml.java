@@ -39,7 +39,6 @@ public class LectureXml {
 			if (listFile[i].startsWith("TEST"))
 			{
 				listReport.add(listFile[i]);
-				System.out.println(i);
 			}
 		}
 		
@@ -107,7 +106,7 @@ public class LectureXml {
 		WriteHtml w=new WriteHtml(listMutation,mutationResult,nbMutakill);
 		
 		w.WriteFile();
-		w.printFile();
+	
 	}
 	
 }

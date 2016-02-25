@@ -87,7 +87,7 @@ public class WriteHtml {
 		
 		for (int k=0; k<mutationName.size(); k++)
 		{
-			System.out.println(k);
+			
 			String s;
 			s=mutationName.get(k);
 			if (mutationResult[k]==true)
