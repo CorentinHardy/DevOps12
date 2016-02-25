@@ -1,9 +1,9 @@
 #! /bin/bash
 
 
-javac -d bin src/*.java 
+javac -d GenerationXml/bin GenerationXml/src/*.java 
 
 if test $? -eq 0
 then 
-	java -cp bin Main my-app
+	java -cp GenerationXml/bin Main ProjetDevOps/DevopsEntree
 fi

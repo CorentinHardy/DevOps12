@@ -87,12 +87,12 @@ public class WriteHtml {
 		this.add("Nombre de mutants survivants : "+(nbMutation-nbMutationKilled),"p");
 		fich+="</div>";
 		fich+="<div>";
-		this.add("Stastitiques", "h2");
+		this.add("Statistiques", "h2");
 		this.add(stats.get(1), "p");
 		this.add(stats.get(0), "p");
 		fich+="</div>";
 		fich+="<div>";
-		this.add("Résultat par processeur","h2");
+		this.add("Résultats par processeur","h2");
 		
 		for (int k=0; k<mutationName.size(); k++)
 		{
