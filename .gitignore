@@ -16,4 +16,4 @@ bin/
 # build report directory
 TEST/
 mutation-testing-report.html
-
+ProjetDevOps/processor.txt
