@@ -11,3 +11,9 @@
 
 # build directory
 target/
+bin/
+
+# build report directory
+TEST/
+mutation-testing-report.html
+
