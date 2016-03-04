@@ -29,6 +29,23 @@ echo -e "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	# echo `cat $pom | grep "$BALISE_DEB"`
 }
 
+function doProcs(){
+	# on stoque les noms des processeurs pour la boucle
+	cd $cheminProcesseurs
+	processeurs=`ls *.java`
+
+	# on va dans le projet que l'on nous donne en entree
+	cd $projetEntre
+	mvn clean > /dev/null
+
+	for param in $processeurs
+	do
+		param=${param%.java}
+		doPom "$BALISE_DEB${package}$param$BALISE_FIN"
+	done
+}
+
+
 # quelques constantes
 STATUS="target/surefire-reports/" 
 BALISE_DEB="<processor>"
@@ -47,7 +64,17 @@ selector="all"
 
 # entre XXX
 projetEntre="ProjetDevOps/DevopsEntree/"
+if [ -d "$1" ]
+	then
+	echo "yep"
+	if [ -e "$1$pom" ]
+		then
+		echo "yep2"
+		projetEntre=$1
+	fi
+fi
 projetEntre=${posInit}'/'$projetEntre
+echo $projetEntre
 
 # on effectue un bakup du pom
 cp $projetEntre$pom $projetEntre${pom}.BAK
@@ -56,25 +83,15 @@ cp $projetEntre$pom $projetEntre${pom}.BAK
 # si non, il faut rajouter un truc pour que sa marche apres quand meme 
 
 # on clean le contenu du REP_TEST
-ls ${REP_TEST}*.xml | rm -i
+# ls ${REP_TEST}*.xml | rm -i
+rms=`ls ${REP_TEST}*.xml`
+rm $rms
 
 # on met a jour le projet avec processeurs
 cd $mutationsProject
-# mvn install > /dev/null
+mvn install > /dev/null
 
-# on stoque les noms des processeurs pour la boucle
-cd $cheminProcesseurs
-processeurs=`ls *.java`
-
-# on va dans le projet que l'on nous donne en entree
-cd $projetEntre
-mvn clean > /dev/null
-
-for param in $processeurs
-do
-	param=${param%.java}
-	doPom "$BALISE_DEB${package}$param$BALISE_FIN"
-done
+doProcs
 
 echo -e "\n\n########################################################################################"
 echo "########################################################################################"
