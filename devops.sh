@@ -66,15 +66,15 @@ selector="all"
 projetEntre="ProjetDevOps/DevopsEntree/"
 if [ -d "$1" ]
 	then
-	echo "yep"
 	if [ -e "$1$pom" ]
 		then
-		echo "yep2"
 		projetEntre=$1
 	fi
 fi
 projetEntre=${posInit}'/'$projetEntre
-echo $projetEntre
+echo -e "\n\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+echo "on prend en entree "$projetEntre
+echo -e "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n"
 
 # on effectue un bakup du pom
 cp $projetEntre$pom $projetEntre${pom}.BAK
