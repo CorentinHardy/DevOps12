@@ -82,7 +82,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
       </executions>
       <configuration>
         <processors>
-          <processor>DevopsTest.mutators.UnaryOperatorMutator</processor>
+          <processor>DevopsTest.mutators.BinaryOperatorMutator</processor>
         </processors>
       </configuration>
       <!--To be sure that you use the latest version of Spoon, specify it as dependency.-->
