@@ -24,6 +24,7 @@ function doPom(){
 	then
 		# il n'y a aucun reports, on considere que c'est un mort-nee
 		report_export=$REP_TEST$MORT_NEE'-'${selector}'-'${param}".xml"
+		echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?><testsuite/>" > $report_export
 echo -e "\n\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 echo "ce mutant est mort-née, on produit le rapport $report_export "
 echo -e "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n"
