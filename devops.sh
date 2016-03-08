@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# s'occupe de produire le pom avec le bon processeur, compile avec mvn test 
+# puis deplace les rapports xml dans le reppertoire REP_TEST
 function doPom(){
 	# exemple de production: <processor>DevopsTest.mutators.UnaryOperatorMutator</processor>
 	echo -e "\n\n########################################################################################"
@@ -9,10 +11,13 @@ function doPom(){
 	echo -e "########################################################################################\n\n"
 
 	cd $projetEntre
+	# modifie le pom pour notre processeur
 	sed "s/$BALISE_DEB.*/$BALISE_DEB${package}$param$BALISE_FIN/" $pom > pom.tmp
 	mv pom.tmp $pom
+	# compile le projet avec ce pom, et genere les sources avec spoon comme definit precedement
 	mvn test > /dev/null
 
+	# deplace les rapports xml dans le reppertoire REP_TEST
 	cd $STATUS
 	reports=`ls *.xml`
 	for report in $reports
@@ -24,11 +29,9 @@ echo " Deplacement du fichier rapport dans ${report_export}.xml"
 echo -e "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n"
 		mv ${report}".xml" ${report_export}".xml"
 	done
-
-	# fin a suppr XXX
-	# echo `cat $pom | grep "$BALISE_DEB"`
 }
 
+# traite tout les processeurs avec le selecteur $selector
 function doProcs(){
 	# on stoque les noms des processeurs pour la boucle
 	cd $cheminProcesseurs
@@ -83,7 +86,6 @@ cp $projetEntre$pom $projetEntre${pom}.BAK
 # si non, il faut rajouter un truc pour que sa marche apres quand meme 
 
 # on clean le contenu du REP_TEST
-# ls ${REP_TEST}*.xml | rm -i
 rms=`ls ${REP_TEST}*.xml`
 rm $rms
 
