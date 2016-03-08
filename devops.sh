@@ -17,18 +17,29 @@ function doPom(){
 	# compile le projet avec ce pom, et genere les sources avec spoon comme definit precedement
 	mvn test > /dev/null
 
-	# deplace les rapports xml dans le reppertoire REP_TEST
+	# productions ou deplacement des reports
 	cd $STATUS
-	reports=`ls *.xml`
-	for report in $reports
-	do
-		report=$(basename $report '.xml')
-		report_export=$REP_TEST${report}'-'${selector}'-'${param}
+	reports=`ls *.xml 2>/dev/null`
+	if [ -n $reports ]
+	then
+		# il n'y a aucun reports, on considere que c'est un mort-nee
+		report_export=$REP_TEST$MORT_NEE'-'${selector}'-'${param}".xml"
 echo -e "\n\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-echo " Deplacement du fichier rapport dans ${report_export}.xml"
+echo "ce mutant est mort-née, on produit le rapport $report_export "
 echo -e "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n"
-		mv ${report}".xml" ${report_export}".xml"
-	done
+	else
+		# on deplace les rapports xml dans le repertoire REP_TEST
+		for report in $reports
+		do
+			report=$(basename $report '.xml')
+			report_export=$REP_TEST${report}'-'${selector}'-'${param}".xml"
+echo -e "\n\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+echo " Deplacement du fichier rapport dans ${report_export}"
+echo -e "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n"
+			mv ${report}".xml" ${report_export}
+		done
+	fi
+	
 }
 
 # traite tout les processeurs avec le selecteur $selector
@@ -55,6 +66,7 @@ BALISE_DEB="<processor>"
 BALISE_FIN="<\/processor>"
 posInit=`pwd`
 REP_TEST="${posInit}/TEST/"
+MORT_NEE="TEST-MORT_NEE"
 
 mutationsProject="ProjetDevOps/DevopsMutation/"
 mutationsProject=${posInit}'/'$mutationsProject
@@ -86,8 +98,12 @@ cp $projetEntre$pom $projetEntre${pom}.BAK
 # si non, il faut rajouter un truc pour que sa marche apres quand meme 
 
 # on clean le contenu du REP_TEST
-rms=`ls ${REP_TEST}*.xml`
-rm $rms
+rms=`ls ${REP_TEST}*.xml 2>/dev/null`
+if [ -n "$rms" ];
+then
+	echo "on supprime les reports qui etaient contenu dans $REP_TEST" 
+	rm $rms
+fi
 
 # on met a jour le projet avec processeurs
 cd $mutationsProject
