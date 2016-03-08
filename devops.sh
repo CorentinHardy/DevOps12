@@ -68,9 +68,9 @@ selector="all"
 # entre XXX
 projetEntre="ProjetDevOps/DevopsEntree/"
 if [ -d "$1" ]
-	then
+then
 	if [ -e "$1$pom" ]
-		then
+	then
 		projetEntre=$1
 	fi
 fi
@@ -103,7 +103,8 @@ echo -e "#######################################################################
 
 # execution de l'affichage
 cd $posInit/GenerationXml
-./xml.sh
+# on appelle le script pour lancer la generation de l'affichage avec le projet deonné en entrée.
+./xml.sh $REP_TEST
 
 cd $posInit
 mv $projetEntre${pom}.BAK $projetEntre$pom 

@@ -17,19 +17,16 @@ import org.xml.sax.SAXException;
 public class LectureXml {
 	int fail=0;
 	int error=0;
-	private String racineMaven;
-	private String repReport="/target/surefire-reports";
 	private File rep;
 	private String[] listFile;
 	private List<String> listReport=new ArrayList<String>();
 	int nbMutakill=0;
 	private List<String> listMutation=new ArrayList<String>();
 	private boolean[] mutationResult;
-	private String dest="../mutation-testing-report.xml";
-	public LectureXml(String racineMaven)
+
+	public LectureXml(File rep)
 	{
-		this.racineMaven="../"+racineMaven;
-		this.rep=new File(this.racineMaven+repReport+"");
+		this.rep = rep;
 	}
 	
 	public void listerReport()
