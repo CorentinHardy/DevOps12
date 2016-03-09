@@ -18,8 +18,10 @@ function doPom(){
 	mvn test > /dev/null
 
 	# productions ou deplacement des reports
-	cd $STATUS
+	if [ -d "$STATUS" ]; then
+  	cd $STATUS
 	reports=`ls *.xml 2>/dev/null`
+	fi
 	if [ -n $reports ]
 	then
 		# il n'y a aucun reports, on considere que c'est un mort-nee
