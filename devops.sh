@@ -101,6 +101,11 @@ cp $projetEntre$pom $projetEntre${pom}.BAK
 # si non, il faut rajouter un truc pour que sa marche apres quand meme 
 
 # on clean le contenu du REP_TEST
+if [ ! -d $REP_TEST ]; then
+	echo "on cree le repertoire $REP_TEST" 
+	mkdir $REP_TEST
+fi
+
 rms=`ls ${REP_TEST}*.xml 2>/dev/null`
 if [ -n "$rms" ];
 then
