@@ -1,7 +1,10 @@
 #! /bin/bash
 
 javac -d bin src/*.java 
-
+if [ ! -d bin ]
+	then
+		mkdir bin
+fi
 if test $? -eq 0
 then 
 	if [ -n "$1" ]
