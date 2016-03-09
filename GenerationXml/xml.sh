@@ -9,6 +9,6 @@ then
 		java -cp bin Main $1
 		exit 0
 	fi
-	java -cp bin Main TEST/
+	java -cp bin Main tests_reports/
 	exit 0
 fi

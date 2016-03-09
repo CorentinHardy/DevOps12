@@ -68,7 +68,7 @@ STATUS="target/surefire-reports/"
 BALISE_DEB="<processor>"
 BALISE_FIN="<\/processor>"
 posInit=`pwd`
-REP_TEST="${posInit}/TEST/"
+REP_TEST="${posInit}/tests_reports/"
 MORT_NEE="TEST-MORT_NEE"
 
 mutationsProject="ProjetDevOps/DevopsMutation/"
