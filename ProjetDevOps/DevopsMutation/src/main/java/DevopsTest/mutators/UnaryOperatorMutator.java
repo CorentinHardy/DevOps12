@@ -14,7 +14,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class UnaryOperatorMutator extends AbstractProcessor<CtElement> {
-
 	private static final double MUTATION_PROBABILITY = 0.01;
 	private static final Random random = new Random();
 	private static final String file_modif = "../tests_reports/" + MUTATION_PROBABILITY + "-" 
