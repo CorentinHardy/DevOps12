@@ -27,10 +27,11 @@ public class DelConstructor extends AbstractProcessor<CtClass<?>> {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void process(CtClass candidate) {
 
-
-		Set<CtConstructor> construct = candidate.getConstructors();
-		for (CtConstructor c : construct) {
-		candidate.removeConstructor(c);
+		if (random.nextFloat()<MUTATION_PROBABILITY) {
+			Set<CtConstructor> construct = candidate.getConstructors();
+			for (CtConstructor c : construct) {
+			candidate.removeConstructor(c);
+			}
 		}
 	}
-}
+}	
