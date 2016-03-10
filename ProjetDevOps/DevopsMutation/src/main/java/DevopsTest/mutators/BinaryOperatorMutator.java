@@ -14,7 +14,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class BinaryOperatorMutator extends AbstractProcessor<CtElement> {
-	private static final double MUTATION_PROBABILITY = 0.2;
+	private static final double MUTATION_PROBABILITY = 0.05;
 	private static final Random random = new Random();
 
 	@Override
@@ -39,7 +39,7 @@ public class BinaryOperatorMutator extends AbstractProcessor<CtElement> {
 			else if(op.getKind().equals(BinaryOperatorKind.MUL))
 				op.setKind(BinaryOperatorKind.DIV);
 			try {
-				PrintWriter modif = new PrintWriter(new FileWriter("../tests_reports/modif.txt", true));
+				PrintWriter modif = new PrintWriter(new FileWriter(new File("../tests_reports/modif.txt"), true));
 				modif.println(Pos);
 				modif.close();
 			} 

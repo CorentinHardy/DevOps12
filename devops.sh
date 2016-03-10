@@ -48,8 +48,8 @@ echo -e "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # traite tout les processeurs avec le selecteur $selector
 function doProcs(){
 	# on stoque les noms des processeurs pour la boucle
-	cd $cheminProcesseurs
-	processeurs=`ls *.java`
+	# cd $cheminProcesseurs
+	# processeurs=`ls *.java`
 
 	# on va dans le projet que l'on nous donne en entree
 	cd $projetEntre
@@ -64,23 +64,30 @@ function doProcs(){
 
 
 # quelques constantes
-STATUS="target/surefire-reports/" 
+posInit=`pwd`
+
+# balises du pom dans lequels est indique quel processeur est utilise
 BALISE_DEB="<processor>"
 BALISE_FIN="<\/processor>"
-posInit=`pwd`
-REP_TEST="${posInit}/tests_reports/"
+# prefixe du rapport en cas de mutant mort-nee.
 MORT_NEE="MORT_NEE"
+# le fichier ou est sauvegarde le rapport mvn de compile en cas de probleme
+MVN_INSTALL_TXT="mvn_install.txt" 
 
+# repertoire ou est enregistrer les rapports de testes des mutants
+REP_TEST="${posInit}/tests_reports/"
+# repertoire dans lequel maven produit les rapports de testes des mutants
+STATUS="target/surefire-reports/" 
+# repertoires du projet contenant les mutants
 mutationsProject="ProjetDevOps/DevopsMutation/"
 mutationsProject=${posInit}'/'$mutationsProject
 cheminProcesseurs="src/main/java/DevopsTest/mutators/"
 cheminProcesseurs=${mutationsProject}$cheminProcesseurs
 pom="pom.xml"
+# prefixe de package utilise dans le pom pour chaque processeur
 package="DevopsTest.mutators."
 
-selector="all"
-
-# entre XXX
+# gestion du repertoire d'entre
 projetEntre="ProjetDevOps/DevopsEntree/"
 if [ -d "$1" ]
 then
@@ -113,9 +120,37 @@ then
 	rm $rms
 fi
 
+MUTT_PROBA_DEBUT="private static final double MUTATION_PROBABILITY = "
+MUTT_PROBA_FIN=";"
+selector="0.152"
+
+read -p "pourcentage de mutants: " selector
+# on change la valeur du pourcentage selectionne
+cd $cheminProcesseurs
+processeurs=`ls *.java`
+for proc in $processeurs
+do
+	sed "s/${MUTT_PROBA_DEBUT}.*/$MUTT_PROBA_DEBUT$selector${MUTT_PROBA_FIN}/" $proc > $proc.tmp
+	mv $proc.tmp $proc
+done
+
 # on met a jour le projet avec processeurs
 cd $mutationsProject
-mvn install > /dev/null
+mvn install > $MVN_INSTALL_TXT
+
+# puis on trait le resultat de la compile du projet
+resultBuild=`cat $MVN_INSTALL_TXT | grep "BUILD FAILURE"`
+if [ -n $resultBuild ];
+then
+	rm $MVN_INSTALL_TXT
+else
+	echo -e "\n\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+	echo $resultBuild "   avait-vous bien rentre un nombre ?"
+	echo -e "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
+	cat $MVN_INSTALL_TXT
+	echo "\n Ce rapport a ete sauvegarde dans $mutationsProject$MVN_INSTALL_TXT \n"
+	exit 0
+fi
 
 doProcs
 
