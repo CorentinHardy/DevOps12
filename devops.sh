@@ -104,7 +104,8 @@ function doProcs(){
 # demande a l'utilisateur un selecteur (un double) et compile le mutationsProject
 # le selecteur selectionne est dans $selector
 function selectSelector(){
-	read -p "pourcentage de mutants: " selector
+	echo "Veuillez entrer le pourcentage de mutation a appliquer par processeurs :"
+	read  selector
 	# on change la valeur du pourcentage selectionne
 	cd $cheminProcesseurs
 	processeurs=`ls *.java`
