@@ -4,5 +4,5 @@ $(function()
       element: 'morris-donut-chart',
        data: [{    
         label: "Mutants morts nés",
-         value: 1        }, {            label: "Mutants tués",            value: 1        }, {            label: "Mutants ayant survécus",   value: 0        }],        resize: true    }); 
+         value: 0        }, {            label: "Mutants tués",            value: 0        }, {            label: "Mutants ayant survécus",   value: 2        }],        resize: true    }); 
  ;});
