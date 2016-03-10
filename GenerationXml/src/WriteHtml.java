@@ -24,6 +24,7 @@ public class WriteHtml {
 	private String destJs="../Report/js/morris-data.js";
 	private String destSucceed="../Report/pages/aliveMutation.html";
 	private String destFailed="../Report/pages/killedMutation.html";
+	private String destMort="../Report/pages/mortNéeMutation.html";
 	
 	private List<String>  message;
 	private List<String> stats;
@@ -42,37 +43,7 @@ public class WriteHtml {
 			"\n</head>" +
 			"\n<body>";
 			
-	public WriteHtml(List<String> mutaName,boolean[] mutaResult,int nbKilled, int fail, int error)
-	{
-		this.mutationName=mutaName;
-		this.mutationResult=mutaResult;
-		this.nbMutation=mutation.size();
-		this.nbMutationKilled=0;
-		
-		for (String mapKey : mutation.keySet()) {
-		
-			if (mutation.get(mapKey).isAlive()==1)
-			{
-				nbMutationKilled++;
-			}
-			if (mutation.get(mapKey).isAlive()==2)
-			{
-				nbMortNee++;
-			}
-			if (mutation.get(mapKey).isAlive()==0)
-			{
-				nbMutationAlive++;
-			}
-			
-		}
-		
-		this.fail=fail;
-		this.error=error;
-		index3="<thead><tr> <td><a href=\"allMutation.html\" >Nombre de codes mutants générés</a> </td> <td>"+nbMutation+"</td> </tr> </thead> <tbody> <tr> <td><a href=\"index.html\">Nombre de mutants morts nés</a></td> <td>"+nbMortNee+"</td> </tr> <tr> <td><a href=\"index.html\" >Nombre de mutants tués</a></td>         <td>"+nbMutationKilled+"</td> </tr><tr>   <td><a href=\"\\index.html\"  target=\"_blank\">Nombre de mutants ayant survécu</a></td> <td>"+nbMutationAlive+"</td>  </tr>   </tbody> </table></div></div>";
-		index4="<!-- jQuery -->    <script src=\"../bower_components/jquery/dist/jquery.min.js\"></script><script src=\"../bower_components/bootstrap/dist/js/bootstrap.min.js\"></script>    <script src=\"../bower_components/metisMenu/dist/metisMenu.min.js\"></script>  <!-- Morris Charts JavaScript -->    <script src=\"../bower_components/raphael/raphael-min.js\"></script>   <script src=\"../bower_components/morrisjs/morris.min.js\"></script>    <script src=\"../js/morris-data.js\"></script>    <!-- Custom Theme JavaScript -->    <script src=\"../dist/js/sb-admin-2.js\"></script></body></html>";
-
-		
-	}
+	
 	
 	public WriteHtml(List<String> mutaName,boolean[] mutaResult,int nbKilled, int fail, int error,Map<String,Mutation> mutation)
 	{
@@ -102,7 +73,7 @@ public class WriteHtml {
 		
 		this.fail=fail;
 		this.error=error;
-		index3="<thead><tr> <td><a href=\"allMutation.html\" >Nombre de codes mutants générés</a> </td> <td>"+nbMutation+"</td> </tr> </thead> <tbody> <tr> <td><a href=\"index.html\">Nombre de mutants morts nés</a></td> <td>"+nbMortNee+"</td> </tr> <tr> <td><a href=\"index.html\" >Nombre de mutants tués</a></td>         <td>"+nbMutationKilled+"</td> </tr><tr>   <td><a href=\"aliveMutation.html\" >Nombre de mutants ayant survécu</a></td> <td>"+nbMutationAlive+"</td>  </tr>   </tbody> </table></div></div>";
+		index3="<thead><tr> <td><a href=\"allMutation.html\" >Nombre de codes mutants générés</a> </td> <td>"+nbMutation+"</td> </tr> </thead> <tbody> <tr> <td><a href=\"mortNéeMutation.html\">Nombre de mutants morts nés</a></td> <td>"+nbMortNee+"</td> </tr> <tr> <td><a href=\"killedMutation.html\" >Nombre de mutants tués</a></td>         <td>"+nbMutationKilled+"</td> </tr><tr>   <td><a href=\"aliveMutation.html\" >Nombre de mutants ayant survécu</a></td> <td>"+nbMutationAlive+"</td>  </tr>   </tbody> </table></div></div>";
 		index4="<!-- jQuery -->    <script src=\"../bower_components/jquery/dist/jquery.min.js\"></script><script src=\"../bower_components/bootstrap/dist/js/bootstrap.min.js\"></script>    <script src=\"../bower_components/metisMenu/dist/metisMenu.min.js\"></script>  <!-- Morris Charts JavaScript -->    <script src=\"../bower_components/raphael/raphael-min.js\"></script>   <script src=\"../bower_components/morrisjs/morris.min.js\"></script>    <script src=\"../js/morris-data.js\"></script>    <!-- Custom Theme JavaScript -->    <script src=\"../dist/js/sb-admin-2.js\"></script></body></html>";
 
 		
@@ -121,6 +92,8 @@ public class WriteHtml {
 		this.updateJs();
 		this.writeAllMutation();
 		this.writeSucceedMutation();
+		this.writeMortNe();
+		this.writeKilledMutation();
 		try
 		{
 		    FileWriter fw = new FileWriter (f);
@@ -264,6 +237,110 @@ public class WriteHtml {
 		
 	}
 	
+	public void writeMortNe()
+	{
+		String result="";
+		result+="<!DOCTYPE html> \n <html lang=\"en\"> \n<head>\n<meta charset=\"utf-8\">\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n    <meta name=\"description\" content=\"\">   \n <meta name=\"author\" content=\"\">\n    <title>Mutation Testing Report</title>\n    <!-- Bootstrap Core CSS -->\n    <link href=\"../bower_components/bootstrap/dist/css/bootstrap.min.css\" rel=\"stylesheet\">\n    <!-- MetisMenu CSS -->\n    <link href=\"../bower_components/metisMenu/dist/metisMenu.min.css\" rel=\"stylesheet\">\n   <!-- Timeline CSS -->\n    <link href=\"../dist/css/timeline.css\" rel=\"stylesheet\">\n    <!-- Custom CSS -->\n    <link href=\"../dist/css/sb-admin-2.css\" rel=\"stylesheet\">\n    <!-- Morris Charts CSS -->\n    <link href=\"../bower_components/morrisjs/morris.css\" rel=\"stylesheet\">\n    <!-- Custom Fonts -->\n    <link href=\"../bower_components/font-awesome/css/font-awesome.min.css\" rel=\"stylesheet\" type=\"text/css\">\n    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->\n</head>\n<body>\n<div class=\"container\">\n<div class=\"col-lg-1\">\n<a href=\"index.html\"><button class=\"btn btn-primary\">Accueil</button> </a>\n</div>\n<div class=\"col-lg-6 col-lg-offset-2\">\n<h1> Mutations ayant été tuées à la compilation</h1>\n</div>\n</div>";
+		File f = new File (destMort);
+		result+="<div class=\"col-lg-6 colg-lg-offset-1\">";
+		result+="<table class=\"table table-condensed table-bordered\"> ";
+		result+="<tdbody> ";
+		
+
+		result+="<div class=\"col-lg-6 colg-lg-offset-1\">";
+		result+="<table class=\"table table-condensed table-bordered\"> ";
+		result+="<tdbody> ";
+		
+		for (String mapKey : mutation.keySet()) {
+			
+			
+		
+			
+			if (mutation.get(mapKey).isAlive()==2)
+			{
+				result+=" <tr> <td>"+mutation.get(mapKey).getName().substring(0, mutation.get(mapKey).getName().length()-4)+"</td> <td> A été tué à la compilation </td> </tr> ";
+			}
+			
+		}
+		result+="</tdbody>";
+		result+="</table";
+		result+="</div>";
+		result+="</body>";
+		
+	
+		try
+		{
+			FileWriter fw=new FileWriter(f);
+			fw.write(result);
+			fw.close();
+		}
+		catch (IOException exception)
+		{
+		    System.out.println ("Erreur lors de la lecture : " + exception.getMessage());
+		}	
+		
+	}
+	
+	
+	
+	public void writeKilledMutation()
+	{
+		String result="";
+		result+="<!DOCTYPE html> \n <html lang=\"en\"> \n<head>\n<meta charset=\"utf-8\">\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n    <meta name=\"description\" content=\"\">   \n <meta name=\"author\" content=\"\">\n    <title>Mutation Testing Report</title>\n    <!-- Bootstrap Core CSS -->\n    <link href=\"../bower_components/bootstrap/dist/css/bootstrap.min.css\" rel=\"stylesheet\">\n    <!-- MetisMenu CSS -->\n    <link href=\"../bower_components/metisMenu/dist/metisMenu.min.css\" rel=\"stylesheet\">\n   <!-- Timeline CSS -->\n    <link href=\"../dist/css/timeline.css\" rel=\"stylesheet\">\n    <!-- Custom CSS -->\n    <link href=\"../dist/css/sb-admin-2.css\" rel=\"stylesheet\">\n    <!-- Morris Charts CSS -->\n    <link href=\"../bower_components/morrisjs/morris.css\" rel=\"stylesheet\">\n    <!-- Custom Fonts -->\n    <link href=\"../bower_components/font-awesome/css/font-awesome.min.css\" rel=\"stylesheet\" type=\"text/css\">\n    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->\n</head>\n<body>\n<div class=\"container\">\n<div class=\"col-lg-1\">\n<a href=\"index.html\"><button class=\"btn btn-primary\">Accueil</button> </a>\n</div>\n<div class=\"col-lg-8 col-lg-offset-2\">\n<h1> Mutations ayant été tuées par les tests</h1>\n</div>\n</div>";
+		File f = new File (destFailed);
+		
+		int c=0;
+		for (String mapKey : mutation.keySet()) {
+			// utilise ici hashMap.get(mapKey) pour accéder aux valeurs
+			result+="<div class=\"col-lg-6 colg-lg-offset-1\">";
+			result+="<table class=\"table table-condensed table-bordered\"> ";
+			
+			if (mutation.get(mapKey).isAlive()==1)
+			{
+				c++;
+				result+=" <thead>"+mutation.get(mapKey).getName().substring(0, mutation.get(mapKey).getName().length()-4)+"</thead> ";
+				for (int i=0;i<mutation.get(mapKey).getTestFailed().size(); i++)
+				{
+					String [] e=mutation.get(mapKey).getTestFailed().get(i).split("-");
+					result+="<tr> <td>"+e[1]+"</td> <td> Le mutant est passé à travers ce test </td> </tr>";
+					
+				}
+				for (int i=0;i<mutation.get(mapKey).getTestError().size(); i++)
+				{
+					String [] e=mutation.get(mapKey).getTestError().get(i).split("-");
+					result+="<tr> <td>"+e[1]+"</td> <td> Le mutant a été tué par ce test (failed) </td> </tr>";
+					
+				}
+				for (int i=0;i<mutation.get(mapKey).getTestSucceed().size(); i++)
+				{
+					String [] e=mutation.get(mapKey).getTestSucceed().get(i).split("-");
+					result+="<tr> <td>"+e[1]+"</td> <td> Le mutant a été tué par ce test (erreur) </td> </tr>";
+					
+				}
+			}
+			result+="</tdbody>";
+			result+="</table";
+			result+="</div>";
+			
+		}
+		if(c==0)
+		{
+			result+="<h1>Aucune mutation n'a été tuée par les tests</h1>";
+		}
+		result+="</body>";
+		try
+		{
+			FileWriter fw=new FileWriter(f);
+			fw.write(result);
+			fw.close();
+		}
+		catch (IOException exception)
+		{
+		    System.out.println ("Erreur lors de la lecture : " + exception.getMessage());
+		}	
+
+	}
+	
 	public void writeSucceedMutation()
 	{
 		String result="";
@@ -279,6 +356,7 @@ public class WriteHtml {
 			if (mutation.get(mapKey).isAlive()==0)
 			{
 				c++;
+				
 				result+=" <tr> <td>"+mutation.get(mapKey).getName().substring(0, mutation.get(mapKey).getName().length()-4)+"</td> <td> <a href=\"../../tests_reports/"+mutation.get(mapKey).getName().substring(0, mutation.get(mapKey).getName().length()-4)+"-modif.txt\" >Voir les différences avec le code original</a>  </td> </tr> ";
 			}
 			result+="</tdbody>";

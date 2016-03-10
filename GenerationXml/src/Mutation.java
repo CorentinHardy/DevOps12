@@ -22,6 +22,18 @@ public class Mutation {
 	private List<String> testError=new ArrayList<String>();
 	private boolean mortNee=false;
 	
+	public List<String> getTestSucceed()
+	{
+		return testSucceed;
+	}
+	public List<String> getTestFailed()
+	{
+		return testFailed;
+	}
+	public List<String> getTestError()
+	{
+		return testError;
+	}
 	public int isAlive() // 0 oui, 1 test error, 2 mort née
 	{
 		if(mortNee)
