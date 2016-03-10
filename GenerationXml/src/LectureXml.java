@@ -1,8 +1,10 @@
 import java.io.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Iterator;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -23,6 +25,7 @@ public class LectureXml {
 	int nbMutakill=0;
 	private List<String> listMutation=new ArrayList<String>();
 	private boolean[] mutationResult;
+	private Map<String,Mutation> mutation=new HashMap<String,Mutation>();
 
 	public LectureXml(File rep)
 	{
@@ -37,6 +40,25 @@ public class LectureXml {
 			if (listFile[i].startsWith("TEST"))
 			{
 				listReport.add(listFile[i]);
+			}
+			if(listFile[i].startsWith("MORT"))
+			{
+				String [] bigName=listFile[i].split("-");
+				mutation.put(bigName[1]+bigName[2], new Mutation(bigName[1]+bigName[2],true));
+			}
+		}
+		for (int i=0 ; i<listReport.size() ; i++)
+		{
+			String [] bigName=listReport.get(i).split("-");
+			
+			String name=bigName[2]+"-"+bigName[3];
+			if ( !mutation.containsKey(name)) 
+			{
+				mutation.put(name, new Mutation(name,rep));
+				mutation.get(name).addTest(listReport.get(i));
+			}
+			else {
+				mutation.get(name).addTest(listReport.get(i));
 			}
 		}
 		
@@ -110,12 +132,13 @@ public class LectureXml {
 		//(List<String> mutaName,boolean[] mutaResult,int nbKilled)
 		
 		this.readAll();
-		WriteHtml w=new WriteHtml(listMutation,mutationResult,nbMutakill,fail,error);
+		WriteHtml w=new WriteHtml(listMutation,mutationResult,nbMutakill,fail,error,mutation);
 		
 		w.WriteFile();
 	
 	}
 	
 	
+
 	
 }

@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.io.File;
 import java.text.*; 
 import java.io.File;
@@ -19,6 +21,8 @@ import org.w3c.dom.Element;
 
 
 public class WriteXml {
+
+	private Map<String,Mutation> mutation=new HashMap<String,Mutation>();
 
 	private int nbmuta;
 	private int nbKill;
@@ -115,6 +119,9 @@ public class WriteXml {
 	    }           
 
 	}
+	
+	
+	
 }
 
 

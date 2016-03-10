@@ -1,0 +1,33 @@
+</div>
+<div class="col-lg-6 col-lg-offset-2">
+<h1> Affichage de toutes les mutations<h1>
+</div>
+</div>
+
+	<div class="col-lg-6 colg-lg-offset-1">
+
+<table class="table table-condensed table-bordered"> 
+                 
+         <thead> 
+                 <tr> 
+                 <td><a href="index.html" >Nombre de codes mutants générés</a> </td> 
+                 <td>2</td> 
+                 </tr> 
+         </thead> 
+         <tbody> 
+                 <tr> 
+                 <td><a href="index.html">Nombre de mutants morts nées</a></td> 
+                 <td>0</td> 
+                 </tr> 
+                 <tr> 
+                 <td><a href="index.html" >Nombre de mutants tués</a></td> 
+                 <td>18</td> 
+                 </tr> 
+ 		<tr> 
+                 <td><a href="#/"  target="_blank">Nombre de mutants ayant survécu</a></td> 
+                 <td>18</td> 
+                 </tr> 
+                 
+        </tbody> 
+</table>
+	</div>
