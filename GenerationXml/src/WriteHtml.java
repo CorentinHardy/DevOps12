@@ -17,6 +17,7 @@ public class WriteHtml {
 	private int nbMutationAlive;
 	private int nbMutationKilled;
 	private String dest="../Report/pages/index.html";
+	private String destJs="../Report/js/morris-data.js";
 	
 	private List<String>  message;
 	private List<String> stats;
@@ -25,10 +26,9 @@ public class WriteHtml {
 	
 	private String index2="\n<i class=\"fa fa-bar-chart-o fa-fw\"></i> Result		<div class=\"panel-body\">\n		  <div id=\"morris-donut-chart\"></div> \n</div></div><div class=\"col-lg-6 colg-lg-offset-1\"><table class=\"table table-condensed table-bordered\">  ";
                  
-	private String index3="<thead><tr> <td><a href=\"index.html\" >Nombre de codes mutants générés</a> </td> <td>"+nbMutation+"</td> </tr> </thead> <tbody> <tr> <td><a href=\"index.html\">Nombre de mutants morts nées</a></td> <td>"+nbMort+"</td> </tr> <tr> <td><a href=\"index.html\" >Nombre de mutants tués</a></td>         <td>"+nbMutationKilled+"</td> </tr><tr>   <td><a href=\"\\index.html\"  target=\"_blank\">Nombre de mutants ayant survécu</a></td> <td>"+nbMutationAlive+"</td>  </tr>   </tbody> </table></div></div>";
+	private String index3;
 
-	private String index4="<!-- jQuery -->    <script src=\"../bower_components/jquery/dist/jquery.min.js\"></script><script src=\"../bower_components/bootstrap/dist/js/bootstrap.min.js\"></script>    <script src=\"../bower_components/metisMenu/dist/metisMenu.min.js\"></script>  <!-- Morris Charts JavaScript -->    <script src=\"../bower_components/raphael/raphael-min.js\"></script>   <script src=\"../bower_components/morrisjs/morris.min.js\"></script>    <script src=\"../js/morris-data.js\"></script>    <!-- Custom Theme JavaScript -->    <script src=\"../dist/js/sb-admin-2.js\"></script></body></html>";
-	
+	private String index4;
 	private String fich="<!doctype html> \n<html lang=\"fr\"> \n<head>\n<meta charset=\"utf-8\">" +
 			"\n<title>Tests report</title>" +
 			"\n<link rel=\"stylesheet\" href=\"style.css\">" +
@@ -42,8 +42,12 @@ public class WriteHtml {
 		this.mutationResult=mutaResult;
 		this.nbMutation=mutationName.size();
 		this.nbMutationKilled=nbKilled;
+		nbMutationAlive=nbMutation-nbMutationKilled;
 		this.fail=fail;
 		this.error=error;
+		index3="<thead><tr> <td><a href=\"index.html\" >Nombre de codes mutants générés</a> </td> <td>"+nbMutation+"</td> </tr> </thead> <tbody> <tr> <td><a href=\"index.html\">Nombre de mutants morts nées</a></td> <td>"+nbMort+"</td> </tr> <tr> <td><a href=\"index.html\" >Nombre de mutants tués</a></td>         <td>"+nbMutationKilled+"</td> </tr><tr>   <td><a href=\"\\index.html\"  target=\"_blank\">Nombre de mutants ayant survécu</a></td> <td>"+nbMutationAlive+"</td>  </tr>   </tbody> </table></div></div>";
+		index4="<!-- jQuery -->    <script src=\"../bower_components/jquery/dist/jquery.min.js\"></script><script src=\"../bower_components/bootstrap/dist/js/bootstrap.min.js\"></script>    <script src=\"../bower_components/metisMenu/dist/metisMenu.min.js\"></script>  <!-- Morris Charts JavaScript -->    <script src=\"../bower_components/raphael/raphael-min.js\"></script>   <script src=\"../bower_components/morrisjs/morris.min.js\"></script>    <script src=\"../js/morris-data.js\"></script>    <!-- Custom Theme JavaScript -->    <script src=\"../dist/js/sb-admin-2.js\"></script></body></html>";
+
 		
 	}
 	public void printFile()
@@ -56,6 +60,7 @@ public class WriteHtml {
 		this.writeMessage();
 		fich+="</body>\n</head>";
 		File f = new File (dest); 
+		this.updateJs();
 		try
 		{
 		    FileWriter fw = new FileWriter (f);
@@ -124,6 +129,25 @@ public class WriteHtml {
 		
 		
 	}
+	
+	
+	public void updateJs()
+	{
+		File f = new File (destJs); 
+		try
+		{
+			
+			String js="$(function()\n {$(function() { });\n    Morris.Donut({  \n      element: 'morris-donut-chart',\n       data: [{    \n        label: \"Mutants morts nés\",\n         value: "+nbMort+"        }, {            label: \"Mutants tués\",            value: "+nbMutationKilled+"        }, {            label: \"Mutants ayant survécus\",   value: "+nbMutationAlive+"        }],        resize: true    }); \n ;});";
+		    FileWriter fw = new FileWriter (f);
+		    fw.write (js);
+		    fw.close();
+		}
+		catch (IOException exception)
+		{
+		    System.out.println ("Erreur lors de la lecture : " + exception.getMessage());
+		}	
+	}
+	
 	
 	
 }
