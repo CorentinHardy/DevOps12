@@ -1,0 +1,5 @@
+Montrer nombre mort nés, nombre tués, nombre vivant.
+
+Tué => ressortir les test critiques (nombre de mutant tué pour chaque test).
+
+Mutant vivants => pourquoi ils ont pas été tué, afficher la différence entre le code mutant et le code de base (localiser fichier, ligne).

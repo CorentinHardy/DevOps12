@@ -12,12 +12,22 @@ public class WriteHtml {
 	int fail;
 	private List<String> mutationName;
 	private boolean[] mutationResult;
+	private int nbMort;
 	private int nbMutation;
+	private int nbMutationAlive;
 	private int nbMutationKilled;
-	private String dest="../mutation-testing-report.html";
+	private String dest="../Report/pages/index.html";
 	
 	private List<String>  message;
 	private List<String> stats;
+	
+	private String index1="<!DOCTYPE html> \n <html lang=\"en\"> \n<head>\n<meta charset=\"utf-8\">\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n    <meta name=\"description\" content=\"\">   \n <meta name=\"author\" content=\"\">\n    <title>Mutation Testing Report</title>\n    <!-- Bootstrap Core CSS -->\n    <link href=\"../bower_components/bootstrap/dist/css/bootstrap.min.css\" rel=\"stylesheet\">\n    <!-- MetisMenu CSS -->\n    <link href=\"../bower_components/metisMenu/dist/metisMenu.min.css\" rel=\"stylesheet\">\n   <!-- Timeline CSS -->\n    <link href=\"../dist/css/timeline.css\" rel=\"stylesheet\">\n    <!-- Custom CSS -->\n    <link href=\"../dist/css/sb-admin-2.css\" rel=\"stylesheet\">\n    <!-- Morris Charts CSS -->\n    <link href=\"../bower_components/morrisjs/morris.css\" rel=\"stylesheet\">\n    <!-- Custom Fonts -->\n    <link href=\"../bower_components/font-awesome/css/font-awesome.min.css\" rel=\"stylesheet\" type=\"text/css\">\n    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->\n</head>\n<body>\n<div class=\"container\">\n<div class=\"col-lg-1\">\n<a href=\"index.html\"><button class=\"btn btn-primary\">Accueil</button> </a>\n</div>\n<div class=\"col-lg-6 col-lg-offset-2\">\n<h1> Résultat des tests par mutations<h1>\n</div>\n</div>\n<div class=\"container\">\n	<div class=\"col-lg-3 col-lg-offset-O\">";
+	
+	private String index2="\n<i class=\"fa fa-bar-chart-o fa-fw\"></i> Result		<div class=\"panel-body\">\n		  <div id=\"morris-donut-chart\"></div> \n</div></div><div class=\"col-lg-6 colg-lg-offset-1\"><table class=\"table table-condensed table-bordered\">  ";
+                 
+	private String index3="<thead><tr> <td><a href=\"index.html\" >Nombre de codes mutants générés</a> </td> <td>"+nbMutation+"</td> </tr> </thead> <tbody> <tr> <td><a href=\"index.html\">Nombre de mutants morts nées</a></td> <td>"+nbMort+"</td> </tr> <tr> <td><a href=\"index.html\" >Nombre de mutants tués</a></td>         <td>"+nbMutationKilled+"</td> </tr><tr>   <td><a href=\"\\index.html\"  target=\"_blank\">Nombre de mutants ayant survécu</a></td> <td>"+nbMutationAlive+"</td>  </tr>   </tbody> </table></div></div>";
+
+	private String index4="<!-- jQuery -->    <script src=\"../bower_components/jquery/dist/jquery.min.js\"></script><script src=\"../bower_components/bootstrap/dist/js/bootstrap.min.js\"></script>    <script src=\"../bower_components/metisMenu/dist/metisMenu.min.js\"></script>  <!-- Morris Charts JavaScript -->    <script src=\"../bower_components/raphael/raphael-min.js\"></script>   <script src=\"../bower_components/morrisjs/morris.min.js\"></script>    <script src=\"../js/morris-data.js\"></script>    <!-- Custom Theme JavaScript -->    <script src=\"../dist/js/sb-admin-2.js\"></script></body></html>";
 	
 	private String fich="<!doctype html> \n<html lang=\"fr\"> \n<head>\n<meta charset=\"utf-8\">" +
 			"\n<title>Tests report</title>" +
@@ -49,7 +59,7 @@ public class WriteHtml {
 		try
 		{
 		    FileWriter fw = new FileWriter (f);
-		    fw.write (fich);
+		    fw.write (index1+index2+index3+index4);
 		    fw.close();
 		}
 		catch (IOException exception)

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>Mutation Testing Report</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -39,58 +39,66 @@
 </head>
 
 <body>
+<div class="container">
 
-    <div id="wrapper">
-
-
-      
-
-
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="panel panel-default">
-                        
-
-                        <div class="panel-body">
-                            <div id="morris-area-chart"></div>
-                        </div>
-                       
-                    </div>
-                    
-                <div class="col-lg-4">
-                    
-                    <!-- /.panel -->
-
-                    <div class="panel panel-default">
-                        
-                        <div class="panel-body">
-                            <div id="morris-donut-chart"></div>
-                            <a href="#" class="btn btn-default btn-block">View Details</a>
-                        </div>
+<div class="col-lg-1">
+<a href="index.html"><button class="btn btn-primary">Accueil</button> </a>
+</div>
 
 
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                  
-                        <!-- /.panel-heading -->
-                        
-                        <!-- /.panel-body -->
-                        
-                        <!-- /.panel-footer -->
-                    </div>
-                    <!-- /.panel .chat-panel -->
-                </div>
-                <!-- /.col-lg-4 -->
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /#page-wrapper -->
+<div class="col-lg-6 col-lg-offset-2">
+<h1> Résultat des tests par mutations<h1>
+</div>
+</div>
 
-    </div>
-    <!-- /#wrapper -->
+<div class="container">
+	<div class="col-lg-3 col-lg-offset-O">
+		            
+		<i class="fa fa-bar-chart-o fa-fw"></i> Result
+		   
+				
+			<!-- CHART -->      
+	       
+		<div class="panel-body">
+			  <div id="morris-donut-chart"></div>
+			  
+		</div>
+	</div>
 
-    <!-- jQuery -->
+	<div class="col-lg-6 colg-lg-offset-1">
+
+<table class="table table-condensed table-bordered"> 
+                 
+         <thead> 
+                 <tr> 
+                 <td><a href="index.html" >Nombre de codes mutants générés</a> </td> 
+                 <td>2</td> 
+                 </tr> 
+         </thead> 
+         <tbody> 
+                 <tr> 
+                 <td><a href="index.html">Nombre de mutants morts nées</a></td> 
+                 <td>0</td> 
+                 </tr> 
+                 <tr> 
+                 <td><a href="index.html" >Nombre de mutants tués</a></td> 
+                 <td>18</td> 
+                 </tr> 
+ 		<tr> 
+                 <td><a href="#/"  target="_blank">Nombre de mutants ayant survécu</a></td> 
+                 <td>18</td> 
+                 </tr> 
+                 
+        </tbody> 
+</table>
+	</div>
+
+
+</div>
+
+
+
+ <!-- jQuery -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
@@ -106,6 +114,8 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
+
+   
 
 </body>
 
