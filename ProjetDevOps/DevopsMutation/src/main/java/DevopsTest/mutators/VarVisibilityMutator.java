@@ -1,3 +1,10 @@
+/*
+*	Projet DevOps : Change les variables globales en protected
+*	Corentin Hardy, Cyrus Boumedine, Gregory ROBIN
+*/
+
+
+
 package DevopsTest.mutators;
 
 
@@ -14,15 +21,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 
-
-/**
-* Processeur pour changer l'accessibilité d'une variable globale dans une classe en
-* 'protected'.
-*
-* @Selector On applique ce processeur uniquement pour les variables globales,
-* les variables des classes ne sont pas affectées.
-*
-*/
 public class VarVisibilityMutator extends AbstractProcessor<CtClass<?>> {
 	public boolean isToBeProcessed(CtClass<?> candidate) {
 		if (!(candidate instanceof CtMethod)) {

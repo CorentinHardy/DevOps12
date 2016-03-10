@@ -1,3 +1,11 @@
+/*
+*	Projet DevOps : Suppression des constructeur classe
+*	Corentin Hardy, Cyrus Boumedine, Gregory ROBIN
+*/
+
+
+
+
 package DevopsTest.mutators;
 
 
@@ -13,10 +21,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 
-/**
-* Supprime le constructeur d'une classe.
-*
-*/
 public class DelConstructor extends AbstractProcessor<CtClass<?>> {
 	private static final double MUTATION_PROBABILITY = 0.1;
 	private static final Random random = new Random();

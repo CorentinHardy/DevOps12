@@ -14,9 +14,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class BinaryOperatorMutator extends AbstractProcessor<CtElement> {
-
-	private static final double MUTATION_PROBABILITY = 0.01;
-
+	private static final double MUTATION_PROBABILITY = 0.1;
 	private static final Random random = new Random();
 	private static final String file_modif = "../tests_reports/" + MUTATION_PROBABILITY + "-" 
 					+ "BinaryOperatorMutator" + "-" + "modif.txt";
@@ -34,7 +32,7 @@ public class BinaryOperatorMutator extends AbstractProcessor<CtElement> {
 		
 		if (random.nextFloat()<MUTATION_PROBABILITY) {
 			String Pos=op.getPosition().toString();
-			if(op.getKind().equals(BinaryOperatorKind.PLUS))
+				if(op.getKind().equals(BinaryOperatorKind.PLUS))
 				op.setKind(BinaryOperatorKind.MINUS);
 			else if(op.getKind().equals(BinaryOperatorKind.MINUS))
 				op.setKind(BinaryOperatorKind.PLUS);
@@ -42,6 +40,12 @@ public class BinaryOperatorMutator extends AbstractProcessor<CtElement> {
 				op.setKind(BinaryOperatorKind.MUL);
 			else if(op.getKind().equals(BinaryOperatorKind.MUL))
 				op.setKind(BinaryOperatorKind.DIV);
+			else if(op.getKind().equals(BinaryOperatorKind.GE))
+				op.setKind(BinaryOperatorKind.GT);
+			else if(op.getKind().equals(BinaryOperatorKind.LE))
+				op.setKind(BinaryOperatorKind.LT);
+			else if(op.getKind().equals(BinaryOperatorKind.EQ))
+				op.setKind(BinaryOperatorKind.NE);
 			try {
 				PrintWriter modif = new PrintWriter(new FileWriter(new File(file_modif).getAbsolutePath(), true));
 				modif.println(Pos);
