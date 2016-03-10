@@ -7,6 +7,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		
+		
 		LectureXml lec1;
 		File rep = new File(args[0]);
 

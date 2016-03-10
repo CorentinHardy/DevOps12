@@ -80,6 +80,7 @@ public class Mutation {
 	
 	public void readResultTest(String nameTest){
 		
+
 		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		int i=test.indexOf(nameTest);
 		try{
@@ -87,17 +88,16 @@ public class Mutation {
 			final Document document= builder.parse(new File(source+test.get(i)));
 			//listMutation.add(listReport.get(i).substring(5,listReport.get(i).length()-4));
 			final Element racine = document.getDocumentElement();
-			if( (!(racine.getAttribute("failures").equals("0"))) | !(racine.getAttribute("errors").equals("0")))
+			if( ((racine.getAttribute("failures").equals("0"))) && (racine.getAttribute("errors").equals("0")))
 			{
-				
-				
-			
+				testSucceed.add(nameTest);
 			}
+			
 			
 			
 			else
 			{
-				if(racine.getAttribute("failures").equals("0"))
+				if(!racine.getAttribute("failures").equals("0"))
 				{
 					testFailed.add(test.get(i));
 				}

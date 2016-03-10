@@ -44,7 +44,7 @@ public class LectureXml {
 			if(listFile[i].startsWith("MORT"))
 			{
 				String [] bigName=listFile[i].split("-");
-				mutation.put(bigName[1]+bigName[2], new Mutation(bigName[1]+bigName[2],true));
+				mutation.put(bigName[1]+bigName[2], new Mutation(bigName[1]+"-"+bigName[2],true));
 			}
 		}
 		for (int i=0 ; i<listReport.size() ; i++)
@@ -56,6 +56,7 @@ public class LectureXml {
 			{
 				mutation.put(name, new Mutation(name,rep));
 				mutation.get(name).addTest(listReport.get(i));
+				
 			}
 			else {
 				mutation.get(name).addTest(listReport.get(i));
@@ -135,6 +136,7 @@ public class LectureXml {
 		WriteHtml w=new WriteHtml(listMutation,mutationResult,nbMutakill,fail,error,mutation);
 		
 		w.WriteFile();
+		w.writeAllMutation();
 	
 	}
 	
