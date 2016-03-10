@@ -32,7 +32,7 @@ public class BinaryOperatorMutator extends AbstractProcessor<CtElement> {
 		
 		if (random.nextFloat()<MUTATION_PROBABILITY) {
 			String Pos=op.getPosition().toString();
-			if(op.getKind().equals(BinaryOperatorKind.PLUS))
+				if(op.getKind().equals(BinaryOperatorKind.PLUS))
 				op.setKind(BinaryOperatorKind.MINUS);
 			else if(op.getKind().equals(BinaryOperatorKind.MINUS))
 				op.setKind(BinaryOperatorKind.PLUS);
@@ -40,6 +40,12 @@ public class BinaryOperatorMutator extends AbstractProcessor<CtElement> {
 				op.setKind(BinaryOperatorKind.MUL);
 			else if(op.getKind().equals(BinaryOperatorKind.MUL))
 				op.setKind(BinaryOperatorKind.DIV);
+			else if(op.getKind().equals(BinaryOperatorKind.GE))
+				op.setKind(BinaryOperatorKind.GT);
+			else if(op.getKind().equals(BinaryOperatorKind.LE))
+				op.setKind(BinaryOperatorKind.LT);
+			else if(op.getKind().equals(BinaryOperatorKind.EQ))
+				op.setKind(BinaryOperatorKind.NE);
 			try {
 				PrintWriter modif = new PrintWriter(new FileWriter(new File(file_modif).getAbsolutePath(), true));
 				modif.println(Pos);
