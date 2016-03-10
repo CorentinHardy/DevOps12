@@ -15,7 +15,7 @@ function doPom(){
 	sed "s/$BALISE_DEB.*/$BALISE_DEB${package}$param$BALISE_FIN/" $pom > pom.tmp
 	mv pom.tmp $pom
 	# compile le projet avec ce pom, et genere les sources avec spoon comme definit precedement
-	mvn test > /dev/null
+	mvn test #> /dev/null
 
 	# productions ou deplacement des reports
 	if [ -d "$STATUS" ]; then
@@ -106,7 +106,7 @@ if [ ! -d $REP_TEST ]; then
 	mkdir $REP_TEST
 fi
 
-rms=`ls ${REP_TEST}*.xml 2>/dev/null`
+rms=`ls ${REP_TEST}*.* 2>/dev/null`
 if [ -n "$rms" ];
 then
 	echo "on supprime les reports qui etaient contenu dans $REP_TEST" 
