@@ -14,8 +14,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class UnaryOperatorMutator extends AbstractProcessor<CtElement> {
-	private static final double MUTATION_PROBABILITY = 0.05;
+	private static final double MUTATION_PROBABILITY = 0.3;
 	private static final Random random = new Random();
+	private static final String file_modif = "../tests_reports/" + MUTATION_PROBABILITY + "-" 
+					+ "UnaryOperatorMutator" + "-" + "modif.txt";
 
 	@Override
 	public boolean isToBeProcessed(CtElement candidate){
@@ -37,7 +39,7 @@ public class UnaryOperatorMutator extends AbstractProcessor<CtElement> {
 			if(op.getKind().equals(UnaryOperatorKind.NEG))
 				op.setKind(UnaryOperatorKind.POS);
 			try {
-				PrintWriter modif = new PrintWriter(new FileWriter(new File("../tests_reports/modif.txt").getAbsolutePath(), true));
+				PrintWriter modif = new PrintWriter(new FileWriter(new File(file_modif).getAbsolutePath(), true));
 				modif.println(Pos);
 					modif.close();
 			} 
